@@ -15,6 +15,9 @@
             <v-list-item class="slider">
               <v-slider max="20" min="1" v-model="size" thumb-label="always" />
             </v-list-item>
+            <v-list-item class="slider">
+              Hover color
+            </v-list-item>
             <v-list-item class="color-hover">
               <v-color-picker
                 width="200"
@@ -22,6 +25,9 @@
                 hide-mode-switch
                 v-model="colorHover"
               ></v-color-picker>
+            </v-list-item>
+            <v-list-item class="slider">
+              Empty Square color
             </v-list-item>
             <v-list-item class="color-background">
               <v-color-picker
@@ -245,7 +251,7 @@ export default {
     margin-top: 30px;
   }
   .board {
-    margin-top: -570px;
+    margin-top: -690px;
     text-align: center;
   }
 }
