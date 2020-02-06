@@ -20,9 +20,7 @@ export default {
     "coordToShowFinalCount",
     "finalCount",
     "animate",
-    "pool",
-    "colorHover",
-    "colorBackground"
+    "pool"
   ],
   data() {
     return {
@@ -41,7 +39,8 @@ export default {
         for (let i = 0; i < this.pool.length; i++) {
           if (
             this.pool[i][0] == this.row - 1 &&
-            this.pool[i][1] == this.col - 1
+            this.pool[i][1] == this.col - 1 &&
+            this.mat[this.row - 1][this.col - 1] == 1
           ) {
             return "hoverState";
           }
@@ -87,7 +86,7 @@ export default {
 }
 .filled,
 .filled:hover {
-  background-color: rgb(166, 134, 255);
+  background-color: #a686ff;
   cursor: pointer;
   text-align: center;
   .square-text {

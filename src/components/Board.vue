@@ -12,8 +12,6 @@
         :coordToShowFinalCount="coordToShowFinalCount"
         :finalCount="finalCount"
         :animate="animate"
-        :colorHover="colorHover"
-        :colorBackground="colorBackground"
         :pool="pool"
         :mat="mat"
         :row="i"

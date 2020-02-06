@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <v-app>
-      <v-card class="card" elevation="12" width="286">
+      <v-card class="card" elevation="12" width="246">
         <v-navigation-drawer floating permanent>
           <v-list dense rounded>
             <v-list-item @click="startProcess" class="refresh" link>
@@ -16,11 +16,18 @@
               <v-slider max="20" min="1" v-model="size" thumb-label="always" />
             </v-list-item>
             <v-list-item class="color-hover">
-              <v-color-picker hide-inputs v-model="colorHover"></v-color-picker>
+              <v-color-picker
+                width="200"
+                hide-inputs
+                hide-mode-switch
+                v-model="colorHover"
+              ></v-color-picker>
             </v-list-item>
             <v-list-item class="color-background">
               <v-color-picker
+                width="200"
                 hide-inputs
+                hide-mode-switch
                 v-model="colorBackground"
               ></v-color-picker>
             </v-list-item>
@@ -37,8 +44,6 @@
         :coordToShowFinalCount="getCoordsForFinalCount"
         :finalCount="finalCount"
         :animate="animate"
-        :colorHover="colorHover"
-        :colorBackground="colorBackground"
         :pool="pool"
         :mat="mat"
         :size="size"
@@ -64,9 +69,8 @@ export default {
       finalCount: 0,
       coordToShowFinalCount: [null, null],
       animate: false,
-      colorHover: "",
-      colorHovering: "",
-      colorBackground: ""
+      colorHover: "#a686ff",
+      colorBackground: "#ffffff"
     };
   },
   components: {
@@ -85,8 +89,36 @@ export default {
       this.$forceUpdate();
     },
     colorHover(color) {
-      console.log(" ## HOVERING CHANGE ", color);
-      this.colorHovering = color;
+      // check if it has customized style on body and remove those
+      document.body.children.forEach(element => {
+        if (
+          element.customStyleName &&
+          element.customStyleName == "squareHoverState"
+        ) {
+          document.body.removeChild(element);
+        }
+      });
+      // create another global style on top of compiled class
+      var styleObject = document.createElement("style");
+      styleObject.customStyleName = "squareHoverState";
+      styleObject.innerHTML = ".hoverState {background-color: " + color + ";}";
+      document.body.appendChild(styleObject);
+    },
+    colorBackground(color) {
+      // check if it has customized style on body and remove those
+      document.body.children.forEach(element => {
+        if (
+          element.customStyleName &&
+          element.customStyleName == "squareBackgroundColor"
+        ) {
+          document.body.removeChild(element);
+        }
+      });
+      // create another global style on top of compiled class
+      var styleObject = document.createElement("style");
+      styleObject.customStyleName = "squareBackgroundColor";
+      styleObject.innerHTML = ".empty {background-color: " + color + ";}";
+      document.body.appendChild(styleObject);
     }
   },
   mounted() {
@@ -207,12 +239,13 @@ export default {
   .card {
     margin-left: 10px;
     margin-top: 10px;
+    padding-bottom: 13px;
   }
   .slider {
     margin-top: 30px;
   }
   .board {
-    margin-top: -530px;
+    margin-top: -570px;
     text-align: center;
   }
 }
