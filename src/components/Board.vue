@@ -32,9 +32,7 @@ export default {
     "coordToShowFinalCount",
     "finalCount",
     "animate",
-    "pool",
-    "colorHover",
-    "colorBackground"
+    "pool"
   ],
   components: {
     Square
